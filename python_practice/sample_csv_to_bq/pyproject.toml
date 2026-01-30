@@ -1,0 +1,42 @@
+[project]
+name = "sample-csv-to-bq"
+version = "0.1.0"
+description = "CSV データを BigQuery にロードするサンプルプロジェクト"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.0.0",
+    "google-cloud-bigquery>=3.0.0",
+    "pyarrow>=14.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    "poethepoet>=0.24.0",
+    "pre-commit>=3.0.0",
+]
+
+[tool.poe.tasks]
+format = "uv run ruff format ."
+lint = "uv run ruff check --fix ."
+type-check = "uv run mypy ."
+check = ["format", "lint", "type-check"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.mypy.google.cloud.bigquery]
+ignore_missing_imports = true
