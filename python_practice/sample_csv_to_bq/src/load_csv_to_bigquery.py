@@ -43,6 +43,12 @@ def load_csv_to_bigquery(
     table_ref = client.dataset(dataset_id).table(table_id)
 
     # スキーマの自動検出
+    # autodetect=True の動作:
+    # - BigQuery が CSV ファイルの内容を自動的に解析してスキーマ（カラム名、データ型）を推測します
+    # - テーブルが存在しない場合: 自動検出されたスキーマで新しいテーブルが自動作成されます
+    # - テーブルが既に存在する場合: 既存のスキーマと互換性があるかチェックされます
+    #   互換性がない場合はエラーになります（write_disposition の設定に関わらず）
+    # 注意: データ型の推測は完璧ではない場合があるため、重要なテーブルでは明示的にスキーマを指定することを推奨します
     job_config = bigquery.LoadJobConfig(
         autodetect=True,
         write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,

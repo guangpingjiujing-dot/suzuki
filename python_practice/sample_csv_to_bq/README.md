@@ -43,11 +43,26 @@ GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
 
 ## 使い方
 
-### プログラムの実行
+### CSV データのロード
 
 ```bash
 uv run python src/load_csv_to_bigquery.py
 ```
+
+### BigQuery 操作の確認
+
+BigQuery の基本的な操作（データセット一覧、テーブル一覧、クエリ実行など）を確認するスクリプト：
+
+```bash
+uv run python src/bigquery_operations.py
+```
+
+このスクリプトでは以下の操作が可能です：
+- データセット一覧の取得
+- テーブル一覧の取得
+- テーブル情報の表示（行数、サイズ、スキーマなど）
+- テーブルデータのプレビュー
+- カスタム SQL クエリの実行（コード内でコメントアウトされている部分を編集して使用）
 
 ### コードチェック
 
