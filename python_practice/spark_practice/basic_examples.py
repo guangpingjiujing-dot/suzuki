@@ -61,14 +61,16 @@ def example_2_read_csv():
     
     # CSV ファイルを読み込む
     csv_path = "employees.csv"
-    df = spark.read.csv(csv_path, header=True, inferSchema=True)
+    # df = spark.read.csv(csv_path, header=True, inferSchema=True)
+    df = spark.read.csv(csv_path, header=True)
     
     print("=== 例2: CSV ファイルを読み込む ===")
     df.show()
     
     # データを一時的に CSV として保存して読み込む例
     df.write.mode("overwrite").csv("temp_data.csv", header=True)
-    df_read = spark.read.csv("temp_data.csv", header=True, inferSchema=True)
+    # df_read = spark.read.csv("temp_data.csv", header=True, inferSchema=True)
+    df_read = spark.read.csv("temp_data.csv", header=True)
     print("\nCSV から読み込んだデータ:")
     df_read.show()
     df_read.printSchema()
@@ -87,9 +89,20 @@ def example_3_basic_operations():
         ("Charlie", 35, "Engineering"),
         ("Diana", 28, "Sales")
     ]
-    df = spark.createDataFrame(data, ["name", "age", "department"])
+    # df = spark.createDataFrame(data, ["name", "age", "department"])
+    df = spark.createDataFrame(data)
     
     print("=== 例3: 基本的な操作 ===")
+    
+    # スキーマを指定しなかった場合の列名を確認
+    print("\n0. 列名を指定しなかった場合のデフォルト列名:")
+    df.printSchema()
+    df.show()
+    
+    # 後から列名を指定する方法: toDF() メソッドを使用
+    df = df.toDF("name", "age", "department")
+    print("\n列名を指定した後:")
+    df.printSchema()
     
     # データを表示
     print("\n1. 全データを表示:")
