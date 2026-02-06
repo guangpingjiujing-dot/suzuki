@@ -55,24 +55,15 @@ def example_2_read_csv():
     """
     例2: CSV ファイルを読み込む
     
-    注意: 実際に実行する場合は、適切な CSV ファイルのパスを指定してください。
+    employees.csv ファイルからデータを読み込みます。
     """
     spark = create_spark_session()
     
-    # CSV ファイルを読み込む（サンプルデータを作成）
-    # 実際のファイルを読み込む場合は以下のようにします:
-    # df = spark.read.csv("path/to/file.csv", header=True, inferSchema=True)
+    # CSV ファイルを読み込む
+    csv_path = "employees.csv"
+    df = spark.read.csv(csv_path, header=True, inferSchema=True)
     
-    # ここではサンプルデータを作成
-    data = [
-        ("Alice", "Engineering", 50000),
-        ("Bob", "Marketing", 45000),
-        ("Charlie", "Engineering", 60000),
-        ("Diana", "Sales", 40000)
-    ]
-    df = spark.createDataFrame(data, ["name", "department", "salary"])
-    
-    print("=== 例2: CSV 風のデータを読み込む ===")
+    print("=== 例2: CSV ファイルを読み込む ===")
     df.show()
     
     # データを一時的に CSV として保存して読み込む例
