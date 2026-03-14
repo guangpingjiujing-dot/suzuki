@@ -319,7 +319,7 @@ def example_7_conditional_logic():
 if __name__ == "__main__":
     print("DataFrame を使った処理のサンプルコード\n")
     
-    example_1_create_dataframe()
+    # example_1_create_dataframe()
     print("\n" + "="*50 + "\n")
     
     example_2_select_and_filter()
