@@ -1,0 +1,12 @@
+[project]
+name = "jaffle-shop"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    # ローカルで dbt Core（run / build / parse など）— BigQuery アダプタ込み
+    # 「dbt sl」は dbt Cloud CLI 専用。PyPI の `dbt` は Windows で実体が入らないため使わない
+    "dbt-bigquery>=1.8.0",
+    "dbt-metricflow[dbt-bigquery]>=0.10.1",
+]
